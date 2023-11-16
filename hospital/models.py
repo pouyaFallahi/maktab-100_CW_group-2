@@ -29,11 +29,31 @@ class HealthInsurance(models.Model):
 
 class Patient(UserModel):
     patient_id = models.IntegerField(primary_key=True, serialize=True)
-    health_insurance_id = models.ForeignKey(HealthInsurance, on_delete=models.CASCADE, related_name='patient', null=True)
+    health_insurance_id = models.ForeignKey(HealthInsurance, on_delete=models.CASCADE, related_name='patient',
+                                            null=True)
 
 
 class Doctor(UserModel):
-    specialization = models.CharField(null=False)
+    SPECIALTIES = [('Allergology&Immunology', 'Allergology&Immunology'),
+                   ('Infectious_diseases', 'Infectious_diseases'),
+                   ('Dermatology', 'Dermatology'),
+                   ('Internal_Medicine', 'Internal_Medicine'),
+                   ('Endocrinology', 'Endocrinology'),
+                   ('Gastroenterology', 'Gastroenterology'),
+                   ('Geriatrics', 'Geriatrics'),
+                   ('Hematology', 'Hematology'),
+                   ('Cardiology', 'Cardiology'),
+                   ('Cancer_Medicine', 'Cancer_Medicine'),
+                   ('Clinical_Psychology', 'Clinical_Psychology'),
+                   ('Nephrology', 'Nephrology'),
+                   ('Neurophysiopathology', 'Neurophysiopathology'),
+                   ('Neurology', 'Neurology'),
+                   ('Paediatrics', 'Paediatrics'),
+                   ('Pediatric_Psychiatry', 'Pediatric_Psychiatry'),
+                   ('Sports_Medicine', 'Sports_Medicine'),
+                   ('Tropical_Medicine', 'Tropical_Medicine')]
+
+    specialization = models.Choices(SPECIALTIES)
     medical_council_code = models.IntegerField(null=False)
 
 
@@ -45,12 +65,16 @@ class PatientHistory(models.Model):
     prescription = models.TextField(null=False)
     drug_used = models.TextField(blank=True)
     note = models.TextField(blank=True)
-    patient_history_id = models.IntegerField()
+    patient_history_id = models.IntegerField(primary_key=True, serialize=True)
 
 
 class PatientBill(models.Model):
-    patient_bill_id = models
-    patient_history_id = models.OneToOneField(PatientHistory, on_delete=models.CASCADE)
+    patient_bill_id = models.IntegerField(serialize=True, primary_key=True)
+    total_cost = models.FloatField(null=False)
+    patient_history_id = models.ForeignKey(PatientHistory, on_delete=models.CASCADE)
+    date = models.DateTimeField(DATETIME_FORMAT="%Y-%m-%d%H:%M:%S")
+    insurance_contribution = models.FloatField(null=False)
+    transaction_status = models.BooleanField(default=False)
 
 
 class Appointment(models.Model):
