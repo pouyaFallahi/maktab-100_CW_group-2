@@ -1,4 +1,5 @@
 .idea
-vnve-cw
+venv-cw
 venv
 env
+__pycache__
