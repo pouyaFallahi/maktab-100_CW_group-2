@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 
-{% load static %}
 
 <head>
     <meta charset="UTF-8">
@@ -17,11 +16,13 @@
             padding-top: 70px; /* Adjust this value based on your header height */
             padding-bottom: 70px; /* Adjust this value based on your footer height */
         }
+
         .navbar {
             position: fixed;
             top: 0;
             width: 100%;
         }
+
         .footer {
             position: fixed;
             bottom: 0;
@@ -30,48 +31,43 @@
     </style>
 </head>
 <body>
-    <!-- Header -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container">
-            <a class="navbar-brand" href="#">Your Site Name</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href={% url 'posts:list' %}>Home all posts</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href={% url 'authors:list' %}>Authors</a>
-                    </li>
-                    {% comment %} <li class="nav-item">
-                        <a class="nav-link" href="#">Services</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Contact</a>
-                    </li> {% endcomment %}
-                </ul>
-            </div>
+<!-- Header -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand" href="#">Your Site Name</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href={% url 'posts:list' %}>Home all posts</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href={% url 'authors:list' %}>Authors</a>
+                </li>
+            </ul>
         </div>
-    </nav>
-
-    <!-- Content Block -->
-    <div class="container mt-4">
-        {% block content %}
-        {% endblock  %}
     </div>
-    <!-- Footer -->
-    <div class="footer bg-dark text-white text-center py-3">
-        &copy; {% now "Y" %} Your Site Name. All rights reserved.
-    </div>
+</nav>
 
-    <!-- Include Bootstrap JavaScript (optional) -->
-    {% comment %} <script src={% static "posts/js/main.js" %}></script> {% endcomment %}
-    {% block scripts %}
-    {% endblock  %}
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<!-- Content Block -->
+<div>
+    {% block content %}
+    {% endblock %}
+</div>
+<!-- Footer -->
+<div class="footer bg-dark text-white text-center py-3">
+    &copy; {% now "Y" %} Your Site Name. All rights reserved.
+</div>
+
+<!-- Include Bootstrap JavaScript (optional) -->
+{% comment %} <script src={% static "posts/js/main.js" %}></script> {% endcomment %}
+{% block scripts %}
+{% endblock %}
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
