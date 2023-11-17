@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from .models import *
 from django.http import HttpResponse
-from .forms import DoctorForm
+from .forms import DoctorForm, PatientForm
 
 
 def doctor_list(request):
@@ -21,8 +21,13 @@ def doctor_list(request):
 
 
 def patient_list(request):
-    patient_list = Appointment.objects.all()
-    pass
+    patient_list = Patient.objects.all()
+    form = PatientForm()
+    context = {
+        'form': form,
+        'patient_list': patient_list
+    }
+    return render(request, 'patient_list.html', context)
 
 
 def add_user(request):
