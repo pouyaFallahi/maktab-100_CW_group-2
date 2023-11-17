@@ -20,6 +20,22 @@ class UserModel(models.Model):
         abstract = True
 
 
+class DaysModel(models.Model):
+    DAYS_OF_WEEK = [
+        ('Saturday', 'Saturday'),
+        ('Sunday', 'Sunday'),
+        ('Monday', 'Monday'),
+        ('Tuesday', 'Tuesday'),
+        ('wednesday', 'wednesday'),
+        ('Thursday', 'Thursday'),
+        ('Friday', 'Friday')
+    ]
+    days_of_attendance = models.CharField(choices=DAYS_OF_WEEK, max_length=10, null=True, blank=True)
+
+    class Meta:
+        abstract = True
+
+
 class HealthInsurance(models.Model):
     company = models.CharField(max_length=100, null=False)
     address = models.TextField(null=False)
@@ -40,7 +56,7 @@ class Patient(UserModel):
         return f'{self.first_name} - {self.last_name}'
 
 
-class Doctor(UserModel):
+class Doctor(UserModel, DaysModel):
     doctor_id = models.IntegerField(primary_key=True, serialize=True)
     SPECIALTIES = [('Allergology&Immunology', 'Allergology&Immunology'),
                    ('Infectious_diseases', 'Infectious_diseases'),
@@ -60,18 +76,19 @@ class Doctor(UserModel):
                    ('Pediatric_Psychiatry', 'Pediatric_Psychiatry'),
                    ('Sports_Medicine', 'Sports_Medicine'),
                    ('Tropical_Medicine', 'Tropical_Medicine')]
-    DAYS_OF_WEEK = [
-                    ('Saturday', 'Saturday'),
-                    ('Sunday', 'Sunday'),
-                    ('Monday', 'Monday'),
-                    ('Tuesday', 'Tuesday'),
-                    ('wednesday', 'wednesday'),
-                    ('Thursday', 'Thursday'),
-                    ('Friday', 'Friday')
-                    ]
+    # DAYS_OF_WEEK = [
+    #     ('Saturday', 'Saturday'),
+    #     ('Sunday', 'Sunday'),
+    #     ('Monday', 'Monday'),
+    #     ('Tuesday', 'Tuesday'),
+    #     ('wednesday', 'wednesday'),
+    #     ('Thursday', 'Thursday'),
+    #     ('Friday', 'Friday')
+    # ]
     specialization = models.CharField(max_length=50, choices=SPECIALTIES, default='Allergology&Immunology')
     medical_council_code = models.IntegerField(null=False)
-    days_of_attendance = models.CharField(max_length=50, choices=DAYS_OF_WEEK)
+
+    # days_of_attendance = models.CharField(max_length=50, choices=DAYS_OF_WEEK)
 
     def __str__(self):
         return f'{self.first_name} - {self.last_name}'
