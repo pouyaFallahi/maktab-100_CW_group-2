@@ -1,8 +1,8 @@
 from django.contrib import admin
 
-from django.urls import path, include
-from .views import  *
+from django.urls import path
+from .views import doctor_list
 
 urlpatterns = [
-    path("doctor/",doctor)
+    path("doctor/", doctor_list, name='doctor')
 ]
