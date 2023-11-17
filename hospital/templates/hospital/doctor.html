@@ -1,0 +1,35 @@
+{% extends 'base.html'%}
+{% block content %}
+    <form action="">
+
+        {{ form.as_p }}
+        <button type="submit" style="background-color: #ae81da">Choose</button>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Frist Name</th>
+              <th scope="col">Last Name</th>
+              <th scope="col">Specialization</th>
+
+            </tr>
+          </thead>
+          <tbody>
+{#          {{ count }}#}
+          {% for doc in doctor_object %}
+{#                {{ count }}+= 1  #}
+            <tr>
+              <th scope="row">{{loop.counter}}</th>
+              <td>{{ doc.first_name }}</td>
+              <td>{{ doc.last_name }}</td>
+              <td>Otto</td>
+              <td></td>
+            </tr>
+          {% endfor %}
+          </tbody>
+        </table>
+
+    </form>
+{% endblock %}
+</body>
+</html>
