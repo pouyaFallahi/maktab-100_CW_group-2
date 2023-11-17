@@ -1,26 +1,15 @@
 from django import forms
-from .models import Doctor
+from .models import Doctor, Patient
 
 
 class DoctorForm(forms.Form):
-    specialization = forms.ChoiceField(choices =(('Allergology&Immunology', 'Allergology&Immunology'),
-                                        ('Infectious_diseases', 'Infectious_diseases'),
-                                        ('Dermatology', 'Dermatology'),
-                                        ('Internal_Medicine', 'Internal_Medicine'),
-                                        ('Endocrinology', 'Endocrinology'),
-                                        ('Gastroenterology', 'Gastroenterology'),
-                                        ('Geriatrics', 'Geriatrics'),
-                                        ('Hematology', 'Hematology'),
-                                        ('Cardiology', 'Cardiology'),
-                                        ('Cancer_Medicine', 'Cancer_Medicine'),
-                                        ('Clinical_Psychology', 'Clinical_Psychology'),
-                                        ('Nephrology', 'Nephrology'),
-                                        ('Neurophysiopathology', 'Neurophysiopathology'),
-                                        ('Neurology', 'Neurology'),
-                                        ('Paediatrics', 'Paediatrics'),
-                                        ('Pediatric_Psychiatry', 'Pediatric_Psychiatry'),
-                                        ('Sports_Medicine', 'Sports_Medicine'),
-                                        ('Tropical_Medicine', 'Tropical_Medicine')))
+    specialization = forms.ChoiceField(choices=Doctor.SPECIALTIES)
+    days_of_attendance = forms.MultipleChoiceField(choices=Doctor.DAYS_OF_WEEK)
+
+    doctor_obj = forms.ModelChoiceField(queryset=Doctor.objects.all())
 
 
-doctor_obj = forms.ModelChoiceField(queryset=Doctor.objects.all())
+class PatientForm(forms.ModelForm):
+    class Meta:
+        model = Patient
+        fields = ['first_name', 'last_name', 'birth_date']
