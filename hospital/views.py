@@ -32,3 +32,12 @@ def patient_list(request):
 
 def add_user(request):
     pass
+
+
+def home(request):
+    if request.COOKIES.get('visited'):
+        response = HttpResponse('<h1 style="color: red">Welcome Back :)</h1>')
+    else:
+        response = HttpResponse('<h1>Welcome to Hospital Website</h1>')
+        response.set_cookie('visited', True)
+    return response
