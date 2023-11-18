@@ -2,18 +2,40 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'hospital/css/style.css' %}"/>
     <title>Patient List</title>
 </head>
 <body>
-    <h1>List of Patients</h1>
 
-        <form action="">
+
+<a class="btn" href="{% url 'hospital:home' %}">Home</a>
+
+<h1>List of Patients</h1>
+
+    <form action="">
         {{ form.as_p }}
-        {% for p in patient_list %}
-            <p>{{ p.first_name }}--{{ p.last_name }}</p>
-            <p>{{ p.appointment }}</p>
-        {% endfor %}
-        </form>
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">First</th>
+                <th scope="col">Last</th>
+                <th scope="col">Handle</th>
+            </tr>
+            </thead>
+
+            {% for p in patient_list %}
+                <tbody>
+                <tr>
+                    <th scope="row">1</th>
+                    <td>{{ p.first_name }}</td>
+                    <td>{{ p.last_name }}</td>
+                    <td>{{ p.appointment }}</td>
+                </tr>
+                </tbody>
+            {% endfor %}
+    </form>
 
 </body>
 </html>
