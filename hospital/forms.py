@@ -2,14 +2,14 @@ from django import forms
 from .models import Doctor, Patient
 
 
-class DoctorForm(forms.Form):
-    specialization = forms.ChoiceField(choices=Doctor.SPECIALTIES)
-    days_of_attendance = forms.MultipleChoiceField(choices=Doctor.DAYS_OF_WEEK)
+class DoctorModelForm(forms.ModelForm):
 
-    doctor_obj = forms.ModelChoiceField(queryset=Doctor.objects.all())
+    class Meta:
+        model = Doctor
+        fields = '__all__'
 
 
 class PatientForm(forms.ModelForm):
     class Meta:
         model = Patient
-        fields = ['first_name', 'last_name', 'birth_date']
+        fields = '__all__'
