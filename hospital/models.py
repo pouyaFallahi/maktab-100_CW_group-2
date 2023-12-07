@@ -1,8 +1,9 @@
 from django.db import models
 from django.core.validators import MinValueValidator, MaxValueValidator
+from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
+from .managers import CustomUserManager
 
-
-class UserModel(models.Model):
+class UserModel(AbstractBaseUser, PermissionsMixin):
     gender_choices = [('MALE', 'male'), ('FEMALE', 'female'), ('OTHER', 'other')]
     first_name = models.CharField(max_length=250, null=False)
     last_name = models.CharField(max_length=250, null=False)
@@ -13,6 +14,17 @@ class UserModel(models.Model):
     address = models.TextField(null=False)
     national_id = models.CharField(max_length=100, null=False, unique=True)
     password = models.CharField(max_length=25, default=123)
+
+
+    is_admin = models.BooleanField(default=False)
+    is_creater = models.BooleanField(default=False)
+    is_brand = models.BooleanField(default=True)
+
+
+
+    USERNAME_FIELD = 'email'
+    PASSWORD_FIELD = 'password'
+
 
     def full_name(self):
         return f"{self.first_name} {self.last_name}"
@@ -53,7 +65,6 @@ class Patient(UserModel):
     patient_id = models.IntegerField(primary_key=True, serialize=True)
     health_insurance_id = models.ForeignKey(HealthInsurance, on_delete=models.CASCADE, related_name='patient',
                                             null=True)
-
     def __str__(self):
         return f'{self.first_name} - {self.last_name}'
 
