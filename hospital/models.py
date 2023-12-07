@@ -8,10 +8,11 @@ class UserModel(models.Model):
     last_name = models.CharField(max_length=250, null=False)
     gender = models.CharField(max_length=50, default='FEMALE', choices=gender_choices)
     birth_date = models.DateField()
-    phone = models.CharField(max_length=14, null=False)
-    email = models.EmailField()
+    phone = models.CharField(max_length=14, null=False, unique=True)
+    email = models.EmailField(unique=True)
     address = models.TextField(null=False)
-    national_id = models.CharField(max_length=100, null=False)
+    national_id = models.CharField(max_length=100, null=False, unique=True)
+    password = models.CharField(max_length=25, default=123)
 
     def full_name(self):
         return f"{self.first_name} {self.last_name}"

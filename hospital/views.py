@@ -2,7 +2,8 @@ from django.shortcuts import render
 from .models import Doctor, Patient
 from django.views.generic.list import ListView
 from django.http import HttpResponse
-from .forms import DoctorModelForm, PatientForm
+from .forms import DoctorModelForm, PatientForm, LoginForm
+
 
 def doctor_create(request):
     if request.method == 'POST':
@@ -47,3 +48,8 @@ class PatientListView(ListView):
 
 class DoctorListView(ListView):
     model = Doctor
+
+def log_in(request):
+    if request.method == 'POST':
+        form = LoginForm(request.POST)
+        render(request, )
