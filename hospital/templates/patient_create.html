@@ -1,41 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    {% load static %}
-    <link rel="stylesheet" type="text/css" href="{% static 'hospital/css/style.css' %}"/>
-    <title>Patient List</title>
-</head>
-<body>
+{% extends "base.html" %}
 
 
-<a class="btn" href="{% url 'hospital:home' %}">Home</a>
+{% block content %}
 
-<h1>List of Patients</h1>
 
-    <form action="">
+    <form action="" method="post">
+        {% csrf_token  %}
         {{ form.as_p }}
-        <table class="table">
-            <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">First</th>
-                <th scope="col">Last</th>
-                <th scope="col">Handle</th>
-            </tr>
-            </thead>
-
-            {% for p in patient_list %}
-                <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>{{ p.first_name }}</td>
-                    <td>{{ p.last_name }}</td>
-                    <td>{{ p.appointment }}</td>
-                </tr>
-                </tbody>
-            {% endfor %}
+        <button class="btn btn-primary" type="submit"> submit </button>
     </form>
-
-</body>
-</html>
+{% endblock %}

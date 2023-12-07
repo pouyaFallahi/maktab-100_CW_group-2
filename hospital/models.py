@@ -1,7 +1,4 @@
-import phone_field
 from django.db import models
-from phone_field import PhoneField
-from src import settings
 from django.core.validators import MinValueValidator, MaxValueValidator
 
 
@@ -15,6 +12,10 @@ class UserModel(models.Model):
     email = models.EmailField()
     address = models.TextField(null=False)
     national_id = models.CharField(max_length=100, null=False)
+
+    def full_name(self):
+        return f"{self.first_name} {self.last_name}"
+
 
     class Meta:
         abstract = True
