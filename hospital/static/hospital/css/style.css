@@ -1,0 +1,18 @@
+body {
+            padding-top: 70px; /* Adjust this value based on your header height */
+            padding-bottom: 70px; /* Adjust this value based on your footer height */
+        }
+
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+        }
+
+
+       .footer {
+           position: fixed;
+           bottom: 0;
+           width: 100%;
+           margin-bottom: 100px;
+       }
